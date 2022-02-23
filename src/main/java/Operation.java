@@ -1,3 +1,5 @@
+import exceptions.InvalidOperationException;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,7 +32,10 @@ public enum Operation {
         }
     }
 
-    public static Operation getOperationByValue(String value) {
-        return BY_VALUE.get(value);
+    public static Operation getOperationByValue(String value) throws InvalidOperationException {
+        Operation operation = BY_VALUE.get(value);
+
+        if (operation == null) throw new InvalidOperationException();
+        return operation;
     }
 }
